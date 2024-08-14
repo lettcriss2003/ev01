@@ -1,0 +1,67 @@
+
+version: latest
+
+services:
+  bdev01:
+    image: mongo:latest
+    ports:
+      - "6001:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456789
+    networks:
+      - my_net02
+
+  frontend:
+    image: frontev01:latest
+    ports:
+      - "6002:8080"
+    depends_on:
+      - backend
+    networks:
+      - my_net02
+  
+  backend:
+    image: backev01:latest
+    ports:
+      - "6003:3000"
+    depends_on:
+      - bdev01
+    networks:
+      - my_net02
+
+networks:
+  my_net02:
+    driver: bridge
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
